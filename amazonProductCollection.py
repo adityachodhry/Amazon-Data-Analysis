@@ -8,7 +8,7 @@ from pymongo import MongoClient
 # MongoDB Connection
 client = MongoClient("mongodb://localhost:27017/")
 db = client["Amazon"]  
-collection = db["productCollection"]  
+collection = db["ProductCollection"]  
 
 product_value = "motorola phone 5g"
 page_count = 1
