@@ -51,9 +51,9 @@ if response.status_code == 200:
     except Exception as e:
         print(f"Error extracting data: {e}")
 
-    # Save extracted data to a JSON file
-    with open("extracted_swiggy_menu.json", "w", encoding="utf-8") as outfile:
-        json.dump(extracted_items, outfile, indent=4, ensure_ascii=False)
+    # # Save extracted data to a JSON file
+    # with open("extracted_swiggy_menu.json", "w", encoding="utf-8") as outfile:
+    #     json.dump(extracted_items, outfile, indent=4, ensure_ascii=False)
 
     print("Extracted data saved to extracted_swiggy_menu.json")
 
