@@ -70,13 +70,24 @@ st.dataframe(df)
 
 # 1. Price Distribution
 st.subheader("💰 Price Distribution of Dishes")
+
+# Calculate dynamic price range
+min_price = df["price"].min()
+max_price = df["price"].max()
+median_price = df["price"].median()
+
+# Find most frequent price range using percentiles
+low_percentile = df["price"].quantile(0.25)
+high_percentile = df["price"].quantile(0.75)
+
 fig, ax = plt.subplots(figsize=(8, 5))
 sns.histplot(df["price"], bins=20, kde=True, color="skyblue", ax=ax)
 ax.set_title("Price Distribution of Dishes")
 ax.set_xlabel("Price (INR)")
 ax.set_ylabel("Count")
 st.pyplot(fig)
-st.write("📊 **Insight**: Most dishes are priced between ₹50 and ₹400, with a peak in the mid-range prices.")
+
+st.write(f"📊 **Insight**: The dishes are priced between **₹{min_price:.2f} and ₹{max_price:.2f}**, with a peak around **₹{median_price:.2f}**. Most dishes are priced in the range of **₹{low_percentile:.2f} - ₹{high_percentile:.2f}**, indicating a mid-range pricing trend.")
 
 # 2. Top 10 Rated Dishes
 st.subheader("🌟 Top 10 Rated Dishes")
@@ -99,14 +110,23 @@ ax.set_ylabel("Rating")
 st.pyplot(fig)
 st.write("🔍 **Analysis**: There is no strong correlation between price and rating. Expensive dishes do not always have higher ratings.")
 
-# 4. Dish Price Range
+# 4. Dish Price Range (Box Plot)
 st.subheader("📊 Price Range of Dishes")
+
+# Calculate dynamic boxplot insights
+q1 = df["price"].quantile(0.25)
+q3 = df["price"].quantile(0.75)
+min_price = df["price"].min()
+max_price = df["price"].max()
+median_price = df["price"].median()
+
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.boxplot(x=df["price"], color="lightgreen", ax=ax)
 ax.set_title("Dish Price Range")
 ax.set_xlabel("Price (INR)")
 st.pyplot(fig)
-st.write("💰 **Insight**: The price range is widely spread, but most dishes fall between ₹100 and ₹300, with some high-end options.")
+
+st.write(f"💰 **Insight**: The price range is widely spread from **₹{min_price:.2f} to ₹{max_price:.2f}**, with most dishes priced between **₹{q1:.2f} and ₹{q3:.2f}**. The median price is **₹{median_price:.2f}**, showing that the majority of dishes fall within an affordable range.")
 
 # ---- USER SELECTION ----
 st.subheader("🔍 Filter Dishes by Price Range")
