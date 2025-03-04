@@ -136,14 +136,34 @@ filtered_df = df[(df["price"] >= min_price) & (df["price"] <= max_price)]
 st.write(f"Showing dishes between ₹{min_price} and ₹{max_price}")
 st.dataframe(filtered_df)
 
-# ---- SUMMARY ----
+# ---- DYNAMIC KEY INSIGHTS ----
 st.subheader("📌 Key Insights")
-st.write("""
-- Most dishes are priced between **₹50 - ₹400**.
-- **Top-rated dishes** are not always the most expensive.
-- There is **no strong correlation** between price and rating.
-- The **majority of dishes** fall within a mid-range price category.
+
+# 1. Calculate dynamic price distribution
+min_price = df["price"].min()
+max_price = df["price"].max()
+median_price = df["price"].median()
+low_percentile = df["price"].quantile(0.25)
+high_percentile = df["price"].quantile(0.75)
+
+# 2. Analyze rating vs. price correlation
+correlation = df["price"].corr(df["rating"])  # Find correlation
+correlation_text = "no strong correlation" if abs(correlation) < 0.3 else (
+    "a slight positive correlation" if correlation > 0 else "a slight negative correlation"
+)
+
+# 3. Find most expensive and highest-rated dishes
+most_expensive_dish = df.loc[df["price"].idxmax(), "name"]
+highest_rated_dish = df.loc[df["rating"].idxmax(), "name"]
+
+# 4. Generate dynamic insights
+st.write(f"""
+- Most dishes are priced between **₹{low_percentile:.2f} - ₹{high_percentile:.2f}**, with prices ranging from **₹{min_price:.2f} to ₹{max_price:.2f}**.
+- **{highest_rated_dish}** is the highest-rated dish, but **{most_expensive_dish}** is the most expensive.
+- There is **{correlation_text}** between price and rating.
+- The **majority of dishes** fall within the price range of **₹{low_percentile:.2f} - ₹{high_percentile:.2f}**, indicating a mid-range price trend.
 """)
+
 
 # ---- FOOTER ----
 st.write("---")
