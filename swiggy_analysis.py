@@ -76,6 +76,7 @@ ax.set_title("Price Distribution of Dishes")
 ax.set_xlabel("Price (INR)")
 ax.set_ylabel("Count")
 st.pyplot(fig)
+st.write("📊 **Insight**: Most dishes are priced between ₹50 and ₹400, with a peak in the mid-range prices.")
 
 # 2. Top 10 Rated Dishes
 st.subheader("🌟 Top 10 Rated Dishes")
@@ -86,6 +87,7 @@ ax.set_title("Top 10 Rated Dishes")
 ax.set_xlabel("Rating")
 ax.set_ylabel("Dish Name")
 st.pyplot(fig)
+st.write("🌟 **Observation**: The highest-rated dishes are not necessarily the most expensive ones, indicating customer preference based on taste rather than price.")
 
 # 3. Price vs Rating Relationship
 st.subheader("💵 Price vs Rating Relationship")
@@ -95,6 +97,7 @@ ax.set_title("Price vs Rating")
 ax.set_xlabel("Price (INR)")
 ax.set_ylabel("Rating")
 st.pyplot(fig)
+st.write("🔍 **Analysis**: There is no strong correlation between price and rating. Expensive dishes do not always have higher ratings.")
 
 # 4. Dish Price Range
 st.subheader("📊 Price Range of Dishes")
@@ -103,6 +106,7 @@ sns.boxplot(x=df["price"], color="lightgreen", ax=ax)
 ax.set_title("Dish Price Range")
 ax.set_xlabel("Price (INR)")
 st.pyplot(fig)
+st.write("💰 **Insight**: The price range is widely spread, but most dishes fall between ₹100 and ₹300, with some high-end options.")
 
 # ---- USER SELECTION ----
 st.subheader("🔍 Filter Dishes by Price Range")
