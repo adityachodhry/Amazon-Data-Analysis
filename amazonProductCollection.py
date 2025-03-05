@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import time  # Import time module
 from datetime import datetime
 from pymongo import MongoClient
 
@@ -16,7 +17,17 @@ base_url = "https://www.amazon.in/s?k=motorola%20phone%205g&page="
 
 while True:
     url = f"{base_url}{page_count}"
-    response = requests.get(url)
+    
+    # Add a 2-second delay before making the request
+    time.sleep(2)
+
+    # Set headers to mimic a real browser
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.5"
+    }
+
+    response = requests.get(url, headers=headers)
 
     if response.status_code != 200:
         print(f"Error: Received status code {response.status_code} for page {page_count}. Stopping.")
